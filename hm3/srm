@@ -2,6 +2,16 @@
 
 # Remove the files given to the command to the trashcan.
 #TRASH=~/.trash
+
+# If have options, just use common rm.
+for i in "$@"
+do
+        if [[ $i == -* ]]; then
+                rm "$@"
+                exit 0
+        fi
+done
+
 if [ -z "$TRASH" ]; then
 	echo "Environment variable TRASH is not set yet!"
 	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "
@@ -16,9 +26,9 @@ else
 		#Here, I use a global trashbin where all the deleted files are moved to. Compared to hide the file in its directory, this way may cost more time when using srm, but may cost less when unrm the file to the current directory and has less implementation complication.
 		# If the filename of the file already exists in the trashbin, then the old file will be overwritten (deleted forever).
 		# If the size of the file is bigger than 1G, will notify user that it may take longer time to remove the file to trashbin (especially when the trashbin and the file to be removed are not on the same disk).
-		size=`wc -c "$i" | awk '{print $1}'`
+		size=`du -s "$i" | awk '{print $1}'`
 		# echo $size
-		size=$(( $size / 1024 / 1024 / 1024 ))
+		size=$(( $size / 1024 / 1024 ))
 		# echo $size
 		if [ $size -lt 1 ]; then
 			mv "$i" "$TRASH"

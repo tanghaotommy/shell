@@ -2,39 +2,28 @@
 #
 # Lss. A wrapper for the ls command except for arugments -s, -g, -i, which lists the file information from the directory given to the command (directories are treated as file unless explicitly list all the files in them).
 
-arguments=""
-#array=()
-if [ $# -lt 1 ]; then
-	ls -l -S
-else
-	for i in "$@"
-	do
-		# Options not supported
+options=""
+file=false
+for i in "$@"
+do
+	# Options
+	if [[ $i == -* ]]; then
+		# Assert invalid options
 		if [ "$i" == "-s" -o "$i" == "-g" -o "$i" == "-i" ]; then
-			echo "Usage $0: Not support $i"
+			echo "$0: Invalid option -- $i"
 			exit 1
-		else
-			#printf "Arguments: $i\n"
-			#if i[ ! -d "$i" ]; then
-				#echo "Not a dir!"
-				#array+="$i"
-			#	if [ "$arguments" != "" ]; then
-			# Add the argument to the arguments	
-			arguments="$arguments '$i'"
-			#	else
-			#		arguments="'$i'"
-			#	fi
-			#fi
 		fi
-	done
-	if [ "$arguments" != "" ]; then	
-		#echo "Arguments: $arguments"
-		#echo "System: $@"
-		#echo "array: $array"
-		# Beacuse of potential space in the arguments
-		eval ls -d -l -S $arguments
+	else
+		# If not options, must be filename
+		file=true
 	fi
+done
+
+# If arguments contain filename, then put them all to the ls
+if [ $file == true ]; then
+	ls -d -l -S "$@"
+else
+	# If no filename, then ls current directory
+	ls -l -S "$@"
 fi
-#s1="-l"
-#s2="$s1 -l"
-#echo $s2
+

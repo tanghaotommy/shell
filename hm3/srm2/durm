@@ -1,6 +1,11 @@
 #!/bin/sh
 
 # Show the total size of all the files in the trashcan.
+if [ $# -ge 1 ]; then
+        echo "$0: Cannot have any arguments!"
+        exit 1
+fi
+
 if [ -z $TRASH ]; then
 	echo "Environment variable TRASH is not set yet!"
 	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "

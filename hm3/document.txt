@@ -35,6 +35,8 @@ eted.
 
 It has the advantage of fast srm without copying the files around.
 
+Note: These two methods cannot be used at the same time. There might be ways of using a combination of the two. However, I did not do that because it may cause confusion which is move the deleted file back to its original place or current directory when unrm.
+
 unrm:
 NAME
        unrm - Recover the file specified from the trashcan to current directory
@@ -44,16 +46,18 @@ SYNOPSIS
 
 DESCRIPTION
        Recover the files specified from the trashcan to current directory.
+       Note: If use unrm from srm2/, unrm will revover the files specified to their original directories.
 
 srm:
 NAME
        srm - Remove the files given to the command to the trashcan
 
 SYNOPSIS
-       srm [FILE]...
+       srm [OPTION]...[FILE]
 
 DESCRIPTION
        Remove the files given to the command to the trashcan.
+       If given options, srm will just call the normal rm.
 
 lsrm:
 NAME

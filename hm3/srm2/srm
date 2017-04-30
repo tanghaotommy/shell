@@ -2,6 +2,14 @@
 
 # Remove the files given to the command to the trashcan.
 #TRASH=~/.trash
+for i in "$@"
+do
+        if [[ $i == -* ]]; then
+                rm "$@"
+                exit 0
+        fi
+done
+
 if [ -z "$TRASH" ]; then
 	echo "Environment variable TRASH is not set yet!"
 	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "

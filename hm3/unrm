@@ -1,6 +1,14 @@
 #!/bin/sh
 
 # Recover the file specified from the trashcan to current directory.
+for i in "$@"
+do
+	if [[ $i == -* ]]; then
+		echo "$0: Cannot have any options!"
+		exit 1
+	fi
+done
+
 if [ -z $TRASH ]; then
 	echo "Environment variable TRASH is not set yet!"
 	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "
