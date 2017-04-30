@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# Lss. A wrapper for the ls command except for arugments -s, -g, -i, which lists the file information from the directory given to the command (directories are treated as file unless explicitly list all the files in them).
+
+arguments=""
+array=()
+if [ $# -lt 1 ]; then
+	ls -l -S
+else
+	for i in "$@"
+	do
+		if [ "$i" == "-s" -o "$i" == "-g" -o "$i" == "-i" ]; then
+			echo "Usage $0: Not support $i"
+			exit 1
+		else
+			#printf "Arguments: $i\n"
+			#if i[ ! -d "$i" ]; then
+				#echo "Not a dir!"
+					array+=" $i"
+			#	if [ "$arguments" != "" ]; then
+					arguments="$arguments '$i'"
+			#	else
+			#		arguments="'$i'"
+			#	fi
+			#fi
+		fi
+	done
+	if [ "$arguments" != "" ]; then	
+		#echo "Arguments: $arguments"
+		#echo "System: $@"
+		echo "array: $array"
+		ls -d -l -S "${array[@]/#/}"
+	fi
+fi
+#s1="-l"
+#s2="$s1 -l"
+#echo $s2

@@ -1,0 +1,7 @@
+# Add execution bit to the file given to the command
+
+for i in "$@"
+do
+	chmod +x "$i"
+done
+

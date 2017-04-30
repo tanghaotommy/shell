@@ -1,0 +1,15 @@
+# Display a sorted list of undergrad students currently logged in
+
+group="ugrad"
+
+# Iterate over each unique user processes
+for i in `users | sed 's/ /\n/g' | uniq`
+do
+	current="$i"" : ""$group"
+	search=`groups $i`
+	# if the current user is a undergraduate student then print
+	if [[ $search == *$group* ]]; then
+		printf "$i "
+	fi
+done
+printf "\n"

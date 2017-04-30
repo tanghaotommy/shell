@@ -1,0 +1,76 @@
+1. cat x y > y: Output the content of file x and y into file y
+cat x >> x: Add the content of file x to the end of file x
+
+2. Add the execution bit of the file given to the command
+NAME
+	cx - add the execution bit
+
+SYNOPSIS
+	cx [FILE]
+
+DESCRIPTION
+	Add the execution bit to the file given to this command.
+
+3. 
+NAME
+	nf - Display the number of files in the current directory
+
+SYNOPSIS
+	nf
+
+DESCRIPTION
+	Display the number of files in the current directory.
+
+4. 
+NAME
+	lss - List all the files in the current directory in decreasing order of the number of bytes in the file
+
+SYNOPSIS
+	lss
+
+DESCRIPTION
+	List all the files in the current directory in decreasing order of the number of bytes in the file.
+
+5. 
+NAME
+	whoson - Display a sorted list of undergrad students logged in on the current machine
+
+SYNOPSIS
+	whoson
+
+DESCRIPTION
+	Display a sorted list of undergrad students logged in on the current machine.
+
+6. 
+NAME
+	howmany - Display the number of undergrad students logged in on the current machine
+
+SYNOPSIS
+	whoson
+
+DESCRIPTION
+	Display the number of undergrad students logged in on the current machine.
+
+7.
+NAME
+	valid - Determines the given argument is a valid shell variable name
+
+SYNOPSIS
+	valid VARIABLE
+
+DESCRIPTION
+	Determines the given argument is a valid shell variable name. Only accept exactly one variable at a time. Answer "yes" means it is a valid shell variable name while answer "no" means it is NOT a valid shell variable name.
+
+8. 
+NAME
+	prargs - Print out a numbered list of its arguments
+
+SYNOPSIS
+	prargs [ARGUMENT] ...
+
+DESCRIPTION
+	Print out a numbered list of its arguments in the following format:
+	0: "prargs"
+    1: "a"
+    2: "b c"
+    Arguments are parsed by the space between them. If you want the argument contains space in it, please use "" to encapsulate it.

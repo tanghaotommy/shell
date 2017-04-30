@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Remove all the files in the trashcan.
+if [ -z $TRASH ]; then
+	echo "Environment variable TRASH is not set yet!"
+	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "
+	echo "export TRASH=~/.trash/"
+else
+        if [ ! -e "$TRASH" ]; then
+                mkdir "$TRASH"
+        fi
+	for i in `ls "$TRASH"`
+	do
+		ori_dir=`readlink "$TRASH$i"`
+		ori_dir=`pwd "$ori_dir"`/
+		rm "$ori_dir.$i"
+		rm "$TRASH$i"
+	done
+fi

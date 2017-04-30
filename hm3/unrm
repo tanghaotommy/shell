@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Recover the file specified from the trashcan to current directory.
+if [ -z $TRASH ]; then
+	echo "Environment variable TRASH is not set yet!"
+	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "
+	echo "export TRASH=~/.trash/"
+else
+        if [ ! -e "$TRASH" ]; then
+                mkdir "$TRASH"
+        fi
+	current=`pwd`
+	for i in "$@"
+	do
+		if [ -e "$TRASH$i" ]; then
+			mv "$TRASH$i" "$current"
+		else
+			echo ""$0": "$i" does not exist in the trash bin."
+		fi
+	done
+fi

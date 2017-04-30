@@ -1,0 +1,4 @@
+# List all the files in current directory in decreasing order of the bytes in the file
+
+ls -l -S
+

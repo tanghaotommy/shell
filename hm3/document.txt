@@ -1,0 +1,86 @@
+1. Document for lss
+NAME
+       lss - list directory contents
+
+SYNOPSIS
+       lss [OPTION]... [FILE]...
+
+DESCRIPTION
+       List  information  about  the FILEs (the current directory by default).
+       By default, it lists the content by decreasing order of the size of the contents. Moreover, it only shows the content file explicitly specified.
+       It accepts all the arguments supported by ls command except for -s, -i and -g because these options can potentially mess up the order.
+
+       Mandatory  arguments  to  long  options are mandatory for short options
+       too.
+
+2. For the safty remove, I implemented it in two ways. For the first way, I move all the file needed deleting to a global trashcan, and warns user if the deleting file is too big. Also, the unrm operation will move the file from the trashbin to the current directory.
+For the second way, I hide deleting files in their directory and only keep a symbolic link to the deleted file.
+
+(1) First version: I use a global trashbin where all the deleted files are moved to. Compared to hide the file in its directory, this way may cost more time when using srm, but may cost less when unrm the file to the current directory and has less implementation complication.
+
+If the filename of the file already exists in the trashbin, then the old file will be overwritten (deleted forever).
+
+If the size of the file is bigger than 1G, will notify user that it may take longer time to remove the file to trashbin (especially when the trashbin and the file to be removed are not on the same disk).
+
+It has the advantage of easy implementation and control over all the files. But may take a little to remove large files because it needs to move the files around.
+
+(2) Second version (ending with 2 to each script): it first hides the original file by add . at the front of the file at their current directory and creates a symbolic link to the hidden file.
+
+If the file to be deleted have the same filename with existing one in the trashbin, it will fail and notify user to change its name first.
+
+This way does not need to mv files around which takes a lot of time when the file size is big.
+
+When unrm, the file will go to the original directory where it was del
+eted. 
+
+It has the advantage of fast srm without copying the files around.
+
+unrm:
+NAME
+       unrm - Recover the file specified from the trashcan to current directory
+
+SYNOPSIS
+       unrm [FILE]...
+
+DESCRIPTION
+       Recover the files specified from the trashcan to current directory.
+
+srm:
+NAME
+       srm - Remove the files given to the command to the trashcan
+
+SYNOPSIS
+       srm [FILE]...
+
+DESCRIPTION
+       Remove the files given to the command to the trashcan.
+
+lsrm:
+NAME
+       lsrm - List all the files in the trashbin
+
+SYNOPSIS
+       lsrm
+
+DESCRIPTION
+       List all the files in the trashbin.
+
+durm:
+NAME
+       durm - Show the total size of all the files in the trashcan.
+
+SYNOPSIS
+       durm
+
+DESCRIPTION
+        Show the total size of all the files in the trashcan.
+
+trash:
+NAME
+       trash - Clean the trashbin
+
+SYNOPSIS
+       trash
+
+DESCRIPTION
+       Remove all the files in the trashcan, namely clean the trashcan.

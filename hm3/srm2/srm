@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Remove the files given to the command to the trashcan.
+#TRASH=~/.trash
+if [ -z "$TRASH" ]; then
+	echo "Environment variable TRASH is not set yet!"
+	echo "Please add the following varibale to .bash_profile or .profile or .login at the ~/ directory: "
+	echo "export TRASH=~/.trash/"
+else
+	if [ ! -e $TRASH ]; then
+		mkdir $TRASH
+		echo "Created $TRASH"
+	fi
+
+	# Second version of srm which first hide the original file at their current directory and creates a symbolic link to the hidden file.
+	# This way does not need to mv files around which takes a lot of time when the file size is big.
+	# When unrm, the file will go to the original directory where it was deleted.
+	for i in "$@"
+	do
+		if [ -e "$TRASH$i" ]; then
+			echo "$0: "$i" already exists in the trashbin. Please either clean the trashbin first or rename the existing file."
+			continue
+		fi
+		if [ -e "$i" ]; then
+			cur_dir=`pwd "$i"`/
+			if [ -e "$TRASH.$i" ]; then
+				rm "$i"
+			else
+				mv "$i" ".$i"
+				ln -s "$cur_dir.$i" "$TRASH$i"
+			fi
+		else
+			echo "$0: Cannot srm "$i". File not exists."
+		fi
+	done
+fi

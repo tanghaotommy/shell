@@ -1,0 +1,3 @@
+# Display the number of undergraduate students logged in
+
+./whoson | wc -w

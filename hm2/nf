@@ -1,0 +1,4 @@
+# Display the number of files in the current directory
+
+ls -l | wc -l
+

@@ -1,0 +1,12 @@
+# Print out a numbered list of its arguments
+
+# Print the script's name
+count=0
+printf "$count: \"$0\"\n"
+
+# Iterate print the argument
+for i in "$@"
+do
+	count=$((count+1))
+	printf "$count: \"$i\"\n"
+done

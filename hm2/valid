@@ -1,0 +1,19 @@
+# Determine whether the given argument is a valid variable name
+
+# Assert whether there is only one argument. If not print error message.
+num=$#
+if [ $num -gt 1 ]; then
+	printf "Only accept one argument!\n"
+	exit 1
+fi
+if [ $num -lt 1 ]; then
+	printf "Please give a variable name.\n"
+	exit 2
+fi
+
+# Use regular expression to assert the validness of given varible name.
+if [[ "$1" =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
+	echo yes
+else
+	echo no
+fi
