@@ -1,0 +1,28 @@
+#!/bin/bash
+
+filename=`echo $0 | sed "s,.*/,,"`
+path=$0
+tmp="/tmp/C-interp-htang6"
+
+# Declare trap
+trap "rm -r $tmp; exit" 2
+
+#echo $path
+#echo $filename
+if [ ! -d "$tmp" ]; then
+	mkdir "$tmp"
+fi
+
+# Compile and output to $tmp
+gcc "$filename.c" -o "$tmp/$filename"
+
+# Test whether successfully compiled
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+# Run the program
+"$tmp/$filename" "$@"
+
+# Clean the $tmp
+rm -r "$tmp" >/dev/null
