@@ -1,0 +1,5 @@
+gcc parser.h parser.c exec.h exec.c main.c
+if [[ $? == 0 ]]
+then
+	./a.out "$@"
+fi

@@ -1,0 +1,3 @@
+#!./parser
+#test 1
+ls -l | wc
