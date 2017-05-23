@@ -17,7 +17,7 @@ parser.o : parser.h
 	$(CC) $(CFLAGS) parser.c
 
 clean:
-	\rm *.o *~ nsh
+	\rm $(OBJS) nsh
 
 tar:
 	tar cfv nsh.tar main.c parser.h parser.c exec.h exec.c
