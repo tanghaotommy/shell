@@ -1,0 +1,41 @@
+#!/bin/nsh
+
+
+#Input Redirection
+echo "Input redirection"
+cat ./manual.txt
+
+#Output redirection
+echo "Output redirection"
+cat manual.txt > tmp
+rm tmp
+
+#Support append
+cat manual.txt>tmp
+cat test>>tmp
+cat tmp
+rm tmp
+
+#Support comment
+echo "Support Comment"
+echo
+
+#Support parsing >, >>, <, | without space around
+echo "Support parsing meta characters without space around"
+echo
+ls|wc
+
+#Support multiple pipes
+echo "Support multiple pipes"
+echo
+ls|uniq|wc
+
+#Support background execution
+echo "Support background execution"
+ls|uniq &
+
+#Implement exit with last exit code
+echo "Implement exit with last exit code"
+echo
+ls > /dev/null
+exit

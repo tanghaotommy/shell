@@ -1,0 +1,19 @@
+NAME
+       nsh - a shell similar to Bourne SHell, implementing a subset of it
+
+SYNOPSIS
+       nsh [file]
+
+DESCRIPTION
+       nsh is a bash similar to Bourne Shell, implementing a subset of it.
+       It supports multiple pipes.
+       It supports parsing without adding space before or after |, >, >>, <
+       meta character.
+       It supports executing shell script when given the file to the nsh command.
+       It supports comment in the shell script.
+       It supports IO redirection and multiple pipes.
+       It supports background execution of commands.
+
+       It is not 100% bullet free. 
+       It does not support built in shell syntax, like for loop, shell variable.
+       
